@@ -1,65 +1,45 @@
 package dev.inje.lublio.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
+
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Record {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int recordId;
 
-    private boolean isCompleted = false;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @Column(nullable = false)
+    private boolean isCompleted;
+
+    @Column(nullable = false)
     private int countCorrect;
+
+    @Column(nullable = false)
     private int countIncorrect;
+
+    @Column(nullable = false)
     private int winningRate;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
-    public int getCountCorrect() {
-        return countCorrect;
-    }
-
-    public void setCountCorrect(int countCorrect) {
-        this.countCorrect = countCorrect;
-    }
-
-    public int getCountIncorrect() {
-        return countIncorrect;
-    }
-
-    public void setCountIncorrect(int countIncorrect) {
-        this.countIncorrect = countIncorrect;
-    }
-
-    public int getWinningRate() {
-        return winningRate;
-    }
-
-    public void setWinningRate(int winningRate) {
-        this.winningRate = winningRate;
-    }
+    @Column(nullable = false)
+    private LocalDateTime finishedAt = LocalDateTime.now();
 
     @Override
     public String toString() {
         return "Record{" +
-                "id=" + id +
+                "recordId=" + recordId +
                 ", isCompleted=" + isCompleted +
                 ", countCorrect=" + countCorrect +
                 ", countIncorrect=" + countIncorrect +

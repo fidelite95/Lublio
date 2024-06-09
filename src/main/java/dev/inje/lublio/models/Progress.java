@@ -1,90 +1,47 @@
 package dev.inje.lublio.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Progress {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long progressId;
+
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     private String progressEng;
+
     private String progressFra;
+
     private String progressDeu;
+
     private String progressSpa;
+
+    private String progressIta;
+
     private String progressRus;
+
     private String progressTur;
-
-    public Progress() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getProgressEng() {
-        return progressEng;
-    }
-
-    public void setProgressEng(String progressEng) {
-        this.progressEng = progressEng;
-    }
-
-    public String getProgressFra() {
-        return progressFra;
-    }
-
-    public void setProgressFra(String progressFra) {
-        this.progressFra = progressFra;
-    }
-
-    public String getProgressDeu() {
-        return progressDeu;
-    }
-
-    public void setProgressDeu(String progressDeu) {
-        this.progressDeu = progressDeu;
-    }
-
-    public String getProgressSpa() {
-        return progressSpa;
-    }
-
-    public void setProgressSpa(String progressSpa) {
-        this.progressSpa = progressSpa;
-    }
-
-    public String getProgressRus() {
-        return progressRus;
-    }
-
-    public void setProgressRus(String progressRus) {
-        this.progressRus = progressRus;
-    }
-
-    public String getProgressTur() {
-        return progressTur;
-    }
-
-    public void setProgressTur(String progressTur) {
-        this.progressTur = progressTur;
-    }
 
     @Override
     public String toString() {
         return "Progress{" +
-                "id=" + id +
+                "progressId=" + progressId +
                 ", progressEng='" + progressEng + '\'' +
                 ", progressFra='" + progressFra + '\'' +
                 ", progressDeu='" + progressDeu + '\'' +
                 ", progressSpa='" + progressSpa + '\'' +
+                ", progressIta='" + progressIta + '\'' +
                 ", progressRus='" + progressRus + '\'' +
                 ", progressTur='" + progressTur + '\'' +
                 '}';
